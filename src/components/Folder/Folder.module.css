@@ -1,0 +1,21 @@
+.container {
+  margin-bottom: 10px;
+  padding-top: 10px;
+}
+
+.folder {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.folder:hover {
+  outline: 1px solid black;
+}
+
+.children {
+  padding-left: 20px;
+}
