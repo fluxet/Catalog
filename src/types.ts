@@ -21,19 +21,19 @@ export type TFolder = {
 
 export type TChild = (TFile | TFolder) & {
   expandedFolders?: string[];
-}
+};
 
 export type TChildren = TChild[];
 
 export type TApp = {
   data: TChildren;
   expandedFolders?: string[];
-}
+};
 
 export type TSearchAcc = {
   paths: string[];
   currentPath: string;
-}
+};
 
 export type SearchBarProps = {
   inputValue: string;
@@ -43,3 +43,14 @@ export type SearchBarProps = {
   onSearchClick: () => void;
   onClearClick: () => void;
 };
+
+export type TData = {
+  children?: TChildren;
+  name: string;
+  type: string;
+};
+
+export type TSearchedPaths = {
+  currentPath: string;
+  paths: string[];
+}

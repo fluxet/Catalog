@@ -1,4 +1,4 @@
-import { TChild, TChildren, TFile, TFolder, TSearchAcc } from './types';
+import { TChild, TData, TFile, TFolder, TSearchAcc, TSearchedPaths } from './types';
 
 export const isFolder = (child: TFile | TFolder): child is TFolder => {
   return child.type === 'FOLDER';
@@ -11,17 +11,6 @@ export const isVisibleBySearch = (searchedPaths = [''], path = '') => {
   const hasSearchedPath = searchedPaths?.some(searchedPath => searchedPath.substring(0, path?.length) === path);
   return hasSearchedPath;
 };
-
-type TData = {
-  children?: TChildren;
-  name: string;
-  type: string;
-}
-
-type TSearchedPaths = {
-  currentPath: string;
-  paths: string[];
-}
 
 export const searchPaths = (data: TData, str: string) => {
   const iter = (data: TData, str: string, acc: TSearchAcc): TSearchAcc => {
