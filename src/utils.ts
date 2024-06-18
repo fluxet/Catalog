@@ -1,4 +1,4 @@
-import { TChild, TData, TFile, TFolder, TSearchAcc, TSearchedPaths } from './types';
+import { TChild, TData, TFile, TFolder, TSearchAcc } from './types';
 
 export const isFolder = (child: TFile | TFolder): child is TFolder => {
   return child.type === 'FOLDER';
@@ -34,7 +34,7 @@ export const searchPaths = (data: TData, str: string) => {
     });
   };
 
-  return iter(data, str, { paths: [], currentPath: '.' }) as unknown as TSearchedPaths;
+  return iter(data, str, { paths: [], currentPath: '.' });
 };
 
 export const searchPathFromRoot = (data: TFolder[], text: string) =>
