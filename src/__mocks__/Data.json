@@ -20,6 +20,11 @@
             "type": "FILE"
           },
           {
+            "mime": "image/png",
+            "name": "SysBtn_store_S.png",
+            "type": "FILE"
+          },
+          {
             "mime": "application/unknown",
             "name": "errlook.hlp",
             "type": "FILE"
@@ -12351,6 +12356,11 @@
                   {
                     "mime": "text/plain",
                     "name": "mlfind.cpp",
+                    "type": "FILE"
+                  },
+                  {
+                    "mime": "image/png",
+                    "name": "store.png",
                     "type": "FILE"
                   },
                   {

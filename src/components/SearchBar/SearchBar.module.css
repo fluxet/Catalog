@@ -1,0 +1,12 @@
+.search {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  gap: 10px;
+  width: max-content;
+}
+
+.search button {
+  cursor: pointer;
+}
