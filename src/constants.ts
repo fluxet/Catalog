@@ -1,0 +1,1 @@
+export const expandedFolders = ['./Common7/Tools', './SDK/Bootstrapper/Packages'];
