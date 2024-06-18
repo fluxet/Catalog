@@ -9,7 +9,13 @@ class SearchBar extends Component<SearchBarProps> {
 
     return (
       <div className={styles.search}>
-        <input onInput={onInputChange} onFocus={onInputFocus} type='text' value={inputValue} />
+        <input
+          onInput={onInputChange}
+          onFocus={onInputFocus}
+          type='text'
+          value={inputValue}
+          placeholder='Filename search'
+        />
         <button onClick={onSearchClick} type='button'>Search</button>
         <button onClick={onClearClick} type='button'>Clear</button>
       </div>
