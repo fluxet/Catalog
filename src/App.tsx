@@ -2,7 +2,7 @@ import React, { ChangeEvent, Component } from 'react';
 import './App.css';
 import List from './components/List/List';
 
-import { TApp } from './types';
+import { TApp, TFolder } from './types';
 import { searchPathFromRoot } from './utils';
 import SearchBar from './components/SearchBar/SearchBar';
 
@@ -49,7 +49,7 @@ class App extends Component<TApp, { inputValue: string, isSearching: boolean }> 
   render() {
     const { data, expandedFolders } = this.props;
     const { inputValue, isSearching } = this.state;
-    const searchedPaths = isSearching ?  searchPathFromRoot(data, inputValue) : [];
+    const searchedPaths = isSearching ?  searchPathFromRoot(data as TFolder[], inputValue) : [];
 
     return (
       <div className='app'>

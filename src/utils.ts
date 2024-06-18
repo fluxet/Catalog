@@ -1,4 +1,4 @@
-import { TFile, TFolder, TSearchAcc } from './types';
+import { TChild, TChildren, TFile, TFolder, TSearchAcc } from './types';
 
 export const isFolder = (child: TFile | TFolder): child is TFolder => {
   return child.type === 'FOLDER';
@@ -12,13 +12,28 @@ export const isVisibleBySearch = (searchedPaths = [''], path = '') => {
   return hasSearchedPath;
 };
 
-export const searchPaths = (data: any, str: string) => {
-  const iter = (data: any, str: string, acc: TSearchAcc) => {
+type TData = {
+  children?: TChildren;
+  name: string;
+  type: string;
+}
+
+type TSearchedPaths = {
+  currentPath: string;
+  paths: string[];
+}
+
+export const searchPaths = (data: TData, str: string) => {
+  const iter = (data: TData, str: string, acc: TSearchAcc): TSearchAcc => {
     if (data.children) {
-      return data.children.reduce((childrenAcc: TSearchAcc, child: any) => iter(child, str, {
-        currentPath: `${acc.currentPath}/${data.name}`,
-        paths: [...childrenAcc.paths],
-      }), acc);
+      return data.children.reduce((childrenAcc: TSearchAcc, child: TChild) => {
+        const childData: TData = child as TData;
+        
+        return iter(childData, str, {
+          currentPath: `${acc.currentPath}/${data.name}`,
+          paths: [...childrenAcc.paths],
+        });
+      }, acc);
     }
 
     const isMatch = data.name.includes(str) && data.type === 'FILE';
@@ -27,11 +42,15 @@ export const searchPaths = (data: any, str: string) => {
     return ({
       currentPath: newCurrentPath,
       paths: isMatch ? [...acc.paths, newCurrentPath] : acc.paths,
-    })
+    });
   };
 
-  return iter(data, str, { paths: [], currentPath: '.' });
+  return iter(data, str, { paths: [], currentPath: '.' }) as unknown as TSearchedPaths;
 };
 
-export const searchPathFromRoot = (data: any, text: string) =>
-  data.reduce((acc: string[], child: any) => [...acc, ...searchPaths(child, text).paths], []);
+export const searchPathFromRoot = (data: TFolder[], text: string) =>
+  data.reduce((acc: string[], child: TChild) => {
+    const childData: TData = child as TData;
+
+    return [...acc, ...searchPaths(childData, text).paths]
+  }, []);
