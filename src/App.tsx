@@ -1,16 +1,26 @@
+import React, { Component } from 'react';
 import './App.css';
-import dataMock from './__mocks__/Data.json'
 import List from './components/List/List';
-import { TChildren } from './types';
+import { TApp } from './types';
 
-const data = dataMock as TChildren;
 
-function App() {
-  return (
-    <div className="app">
-      {data.map(child => <List key={child.name} {...child} />)}
-    </div>
-  );
+class App extends Component<TApp> {
+  render() {
+    const { data, expandedFolders } = this.props;
+
+    return (
+      <div className="app">
+        {data.map(child => (
+          <List
+            key={child.name}
+            path="."
+            expandedFolders={expandedFolders}
+            {...child}
+          />
+        ))}
+      </div>
+    );
+  }
 }
 
 export default App;

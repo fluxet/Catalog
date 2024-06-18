@@ -4,12 +4,13 @@ import { TFolder } from '../../types';
 import { ReactComponent as FolderSVGPlus } from '../../assets/folder-plus.svg';
 import { ReactComponent as FolderSVGMinus } from '../../assets/folder-minus.svg';
 import List from '../List/List';
+import { isExpandedFolder } from '../../utils';
 
 class Folder extends Component<TFolder, { areChildrenVisible: boolean }> {
   constructor(props: TFolder) {
     super(props);
     this.state = {
-      areChildrenVisible: false
+      areChildrenVisible: isExpandedFolder(props.path, props.expandedFolders),
     };
   }
 
@@ -20,7 +21,7 @@ class Folder extends Component<TFolder, { areChildrenVisible: boolean }> {
   }
 
   render() {
-    const { name, children } = this.props;
+    const { name, children, path, expandedFolders } = this.props;
     const { areChildrenVisible } = this.state;
 
     return (
@@ -31,7 +32,7 @@ class Folder extends Component<TFolder, { areChildrenVisible: boolean }> {
         </button>
         {areChildrenVisible && (
           <div className={styles.children}>
-            {children?.map((child) => <List key={child.name} {...child} />)}
+            {children?.map((child) => <List key={child.name} expandedFolders={expandedFolders} {...child} path={path} />)}
           </div>
         )}
       </div>
