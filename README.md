@@ -1,4 +1,5 @@
 # Test task for Erizos
+(file directory simulation implemented on class components)
 
 [Demo](https://catalog-gamma-sooty.vercel.app/)
 
